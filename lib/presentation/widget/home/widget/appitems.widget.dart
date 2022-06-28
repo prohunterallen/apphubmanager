@@ -1,6 +1,8 @@
 import 'package:app_hub_manager/apphub.dart';
+import 'package:app_hub_manager/data/function/padding.fnc.dart';
 import 'package:app_hub_manager/presentation/theme/color.palette.manager.dart';
 import 'package:app_hub_manager/presentation/theme/textstyle.manager.dart';
+import 'package:app_hub_manager/presentation/widget/home/widget/redownload.btmsheet.widget.dart';
 import 'package:flutter/material.dart';
 
 class AppItemsWidget extends StatefulWidget with AppHub {
@@ -64,8 +66,10 @@ class _AppItemsWidgetState extends State<AppItemsWidget> {
                 });
               },
               child: Wrap(
-                runSpacing: 16.r,
+                // runSpacing: 16.r,
                 direction: Axis.vertical,
+                runAlignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   SizedBox(
                       height: 80.h,
@@ -104,6 +108,7 @@ class _AppItemsWidgetState extends State<AppItemsWidget> {
                           curve: Curves.easeOut,
                           duration: const Duration(milliseconds: 325),
                           child: const Icon(Icons.expand_more))),
+                  getPD4
                 ],
               ),
             ),
@@ -146,7 +151,7 @@ class _AppItemsWidgetState extends State<AppItemsWidget> {
                             style: getText4(color: Colors.blue[600]!),
                           ),
                           Text(
-                            'Installed: 10.0.4',
+                            'Installed: Unavalible',
                             style: getText4(color: Colors.blue[600]!),
                           )
                         ],
@@ -163,30 +168,79 @@ class _AppItemsWidgetState extends State<AppItemsWidget> {
                               Icons.info_outline,
                               color: Colors.blue[700],
                             )),
-                        IconButton(
-                            highlightColor: Colors.blue[200],
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.delete_forever,
-                              size: 28.sp,
-                              color: Colors.blue[700],
-                            )),
-                        IconButton(
-                            highlightColor: Colors.blue[200],
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.open_in_new,
-                              size: 28.sp,
-                              color: Colors.blue[700],
-                            )),
-                        IconButton(
-                            highlightColor: Colors.blue[200],
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.sync,
-                              size: 28.sp,
-                              color: Colors.blue[700],
-                            ))
+                        Visibility(
+                          visible: false,
+                          child: IconButton(
+                              highlightColor: Colors.blue[200],
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.delete_forever,
+                                size: 28.sp,
+                                color: Colors.blue[700],
+                              )),
+                        ),
+                        Visibility(
+                          visible: false,
+                          child: IconButton(
+                              highlightColor: Colors.blue[200],
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.open_in_new,
+                                size: 28.sp,
+                                color: Colors.blue[700],
+                              )),
+                        ),
+                        Visibility(
+                          visible: true,
+                          child: IconButton(
+                              highlightColor: Colors.blue[200],
+                              onPressed: () async {
+                                await showModalBottomSheet<bool>(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  useRootNavigator: true,
+                                  isDismissible: true,
+                                  backgroundColor: Colors.white,
+                                  // shape: RoundedRectangleBorder(
+                                  //   borderRadius: BorderRadius.only(
+                                  //     topRight: Radius.circular(24.r),
+                                  //     topLeft: Radius.circular(24.r),
+                                  //   ),
+                                  // ),
+                                  builder: (BuildContext context) =>
+                                      SingleChildScrollView(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom),
+                                      child: SizedBox(
+                                        height: 310.sp,
+                                        child: Padding(
+                                            padding: EdgeInsets.all(20.w),
+                                            child: ReDownloadWidget()),
+                                      ),
+                                    ),
+                                  ),
+                                ).then((value) {});
+                              },
+                              icon: Icon(
+                                Icons.sync,
+                                size: 28.sp,
+                                color: Colors.blue[700],
+                              )),
+                        ),
+                        Visibility(
+                          visible: true,
+                          child: IconButton(
+                              highlightColor: Colors.blue[200],
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.download,
+                                size: 28.sp,
+                                color: Colors.blue[700],
+                              )),
+                        )
                       ],
                     )
                   ],

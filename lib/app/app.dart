@@ -41,7 +41,7 @@ class _AppHubManagerState extends State<AppHubManager> {
             color: primaryColorTheme,
             navigatorKey: navigatorKey,
             routes: routes,
-            title: 'Nayhoi - นายฮ้อย',
+            title: 'App Hub Manager - ศูนย์รวมแอพ',
             theme: themeData,
             locale: langprovider.locale,
             supportedLocales: L10n.all,

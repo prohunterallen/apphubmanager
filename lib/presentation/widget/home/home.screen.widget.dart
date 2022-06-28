@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget with AppHub {
   @override
   Widget build(BuildContext context) {
     return TitleWillScopeWithFooterLayout(
-        title: const TitleWidget(text: 'App Hub Manager'),
+        title: const TitleWidget(text: 'Manager'),
         actions: [
           IconButton(
               onPressed: () {},
@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget with AppHub {
         body: ListView.separated(
           padding: EdgeInsets.only(bottom: 24.sp, top: 24.sp),
           separatorBuilder: (context, index) => getPD16,
-          itemCount: 10 + 1,
+          itemCount: 1 + 1,
           shrinkWrap: true,
           itemBuilder: (context, index) {
             if (index == 0) {
@@ -33,9 +33,12 @@ class HomeScreen extends StatelessWidget with AppHub {
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      'APPS',
-                      style: getText4(color: Colors.blue),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 8.0.sp),
+                      child: Text(
+                        'APPS',
+                        style: getText3(color: Colors.blue),
+                      ),
                     ),
                   ),
                   getPD4,

@@ -54,7 +54,12 @@ class TitleWillScopeWithFooterLayout extends StatelessWidget {
                 sigmaX: 10,
                 sigmaY: 20.0,
               ),
-              child: Image.asset('assets/images/fromavesta.png')),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  'assets/images/fromavesta.png',
+                ),
+              )),
         ),
       ),
     );

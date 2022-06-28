@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class FontConstants {
-  static const String fontFamily = 'Mitr';
+  static const String fontMitrFamily = 'Mitr';
+  static const String fontRobotoFamily = 'Roboto';
 }
 
 class FontWeightManager {
+  static const FontWeight thin = FontWeight.w100;
+  static const FontWeight thinItalic = FontWeight.w100;
   static const FontWeight light = FontWeight.w300;
   static const FontWeight lightItalic = FontWeight.w300;
   static const FontWeight regular = FontWeight.w400;

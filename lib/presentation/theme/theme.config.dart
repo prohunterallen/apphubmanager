@@ -24,7 +24,7 @@ const double inputBorderRadius = 4.0;
 const double inputHeight = 48.0;
 
 //primary color theme
-final Color primaryColorTheme = ColorManager.primary600;
+final Color primaryColorTheme = Colors.blue[800]!;
 
 //Default text color
 final Color primaryTextColorTheme = ColorManager.tone800;

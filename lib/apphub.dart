@@ -6,6 +6,9 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 ///For Multilanguage
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// ignore: unused_import
+// import 'package:flutter_localizations/flutter_localizations.dart';
+// export 'package:flutter_localizations/flutter_localizations.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
