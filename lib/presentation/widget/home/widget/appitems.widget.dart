@@ -1,9 +1,31 @@
+// ignore_for_file: library_prefixes
+
 import 'package:app_hub_manager/apphub.dart';
 import 'package:app_hub_manager/data/function/padding.fnc.dart';
 import 'package:app_hub_manager/presentation/theme/color.palette.manager.dart';
 import 'package:app_hub_manager/presentation/theme/textstyle.manager.dart';
 import 'package:app_hub_manager/presentation/widget/home/widget/redownload.btmsheet.widget.dart';
+import 'package:external_app_launcher/external_app_launcher.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+///Andriod_action
+
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:app_hub_manager/extension/intent_package/intent.dart'
+    as android_intent;
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:app_hub_manager/extension/intent_package/action.dart'
+    as android_action;
+
+// // ignore: unused_import
+// import 'package:app_hub_manager/extension/intent_package/extra.dart'
+//     as android_extra;
+
+// // ignore: unused_import
+// import 'package:app_hub_manager/extension/intent_package/typedExtra.dart'
+//     as android_typedExtra;
 
 class AppItemsWidget extends StatefulWidget with AppHub {
   AppItemsWidget({
@@ -87,9 +109,13 @@ class _AppItemsWidgetState extends State<AppItemsWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            'App Name',
-                            style: getText2(color: ColorManager.tone800),
+                          Wrap(
+                            children: [
+                              Text(
+                                'นายฮ้อย',
+                                style: getText2(color: ColorManager.tone800),
+                              ),
+                            ],
                           ),
                           Text(
                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non vehicula risus. ',
@@ -168,28 +194,63 @@ class _AppItemsWidgetState extends State<AppItemsWidget> {
                               Icons.info_outline,
                               color: Colors.blue[700],
                             )),
+
+                        ///
+                        ///
+                        ///delete app
+                        ///
+                        ///
                         Visibility(
                           visible: false,
                           child: IconButton(
                               highlightColor: Colors.blue[200],
-                              onPressed: () {},
+                              onPressed: () async {
+                                const packageName = "com.num69.num69app";
+                                android_intent.Intent()
+                                  ..setAction(
+                                      android_action.Action.ACTION_DELETE)
+                                  ..setData(Uri.parse("package:$packageName"))
+                                  ..startActivityForResult().then((data) {
+                                    if (kDebugMode) {
+                                      print(data);
+                                    }
+                                  }, onError: (e) {
+                                    if (kDebugMode) {
+                                      print(e);
+                                    }
+                                  });
+                              },
                               icon: Icon(
                                 Icons.delete_forever,
                                 size: 28.sp,
                                 color: Colors.blue[700],
                               )),
                         ),
+
+                        ///
+                        ///
+                        ///Open App
+                        ///
+                        ///
                         Visibility(
                           visible: false,
                           child: IconButton(
                               highlightColor: Colors.blue[200],
-                              onPressed: () {},
+                              onPressed: () async {
+                                await LaunchApp.isAppInstalled(
+                                    androidPackageName: 'com.num69.num69app');
+                              },
                               icon: Icon(
                                 Icons.open_in_new,
                                 size: 28.sp,
                                 color: Colors.blue[700],
                               )),
                         ),
+
+                        ///
+                        ///Redownload or Install
+                        ///
+                        ///
                         Visibility(
                           visible: true,
                           child: IconButton(
@@ -215,7 +276,7 @@ class _AppItemsWidgetState extends State<AppItemsWidget> {
                                               .viewInsets
                                               .bottom),
                                       child: SizedBox(
-                                        height: 310.sp,
+                                        height: 315.sp,
                                         child: Padding(
                                             padding: EdgeInsets.all(20.w),
                                             child: ReDownloadWidget()),
@@ -230,11 +291,16 @@ class _AppItemsWidgetState extends State<AppItemsWidget> {
                                 color: Colors.blue[700],
                               )),
                         ),
+
+                        ///
+                        ///
+                        ///Downlaod
+                        ///
                         Visibility(
                           visible: true,
                           child: IconButton(
                               highlightColor: Colors.blue[200],
-                              onPressed: () {},
+                              onPressed: _showCupertinoDialog,
                               icon: Icon(
                                 Icons.download,
                                 size: 28.sp,
@@ -251,5 +317,30 @@ class _AppItemsWidgetState extends State<AppItemsWidget> {
         ),
       ],
     );
+  }
+
+  void _showCupertinoDialog() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: const Text('App Name is Downloading'),
+            content: Column(
+              children: [
+                const Text('Do not EXIT manager app while downloading.'),
+                getPD8,
+                const LinearProgressIndicator(),
+                getPD8,
+                const Text('15%'),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Cancle')),
+            ],
+          );
+        });
   }
 }

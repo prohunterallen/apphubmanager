@@ -22,6 +22,18 @@ class _InitializationState extends State<Initialization> {
   }
 
   @override
+  void didChangeDependencies() {
+    precacheImage(const AssetImage("assets/images/Waihou.png"), context);
+    precacheImage(const AssetImage('assets/images/icons.png'), context);
+    super.didChangeDependencies();
+  }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return PreloadingWithAccerometerWidget();
+  // }
+
+  @override
   Widget build(BuildContext context) {
     return PreloadingWidget();
   }

@@ -10,9 +10,15 @@ class PreloadingWidget extends StatelessWidget with AppHub {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
       height: double.infinity,
       width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        image: DecorationImage(
+          image: AssetImage("assets/images/Waihou.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
